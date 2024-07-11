@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TaskBoard from './components/TaskBoard';
 import AddTaskForm from './components/AddTaskForm';
+import {useModal} from './hooks/useModal';
 
 const App: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const {isModalOpen, openModal, closeModal} = useModal();
 
     return (
         <div className="min-h-screen bg-gray-200 p-8">
