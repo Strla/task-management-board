@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskBoard from './components/TaskBoard';
-import AddTaskForm from './components/AddTaskForm';
+import TaskForm from './components/TaskForm';
 import {useModal} from './hooks/useModal';
 
 const App: React.FC = () => {
@@ -14,7 +14,7 @@ const App: React.FC = () => {
             >
                 &#43; Add Task
             </button>
-            <AddTaskForm isOpen={isModalOpen} onClose={closeModal}/>
+            <TaskForm isOpen={isModalOpen} onClose={closeModal}/>
             <TaskBoard/>
         </div>
     );

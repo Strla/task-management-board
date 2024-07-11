@@ -19,7 +19,7 @@ const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
         tasks
             .filter(task => task.status === status)
             .map(task => (
-                <Task key={task.id} id={task.id} title={task.title} description={task.description}/>
+                <Task key={task.id} task={task}/>
             ));
 
     return (

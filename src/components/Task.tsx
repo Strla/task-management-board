@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useTasks} from '../hooks/useTasks';
 import {useDrag} from '../hooks/useDrag';
+import TaskForm from './TaskForm';
+import {Task as TaskType} from '../features/tasks/taskTypes';
 
 interface TaskProps {
-    id: string;
-    title: string;
-    description: string;
+    task: TaskType;
 }
 
-const Task: React.FC<TaskProps> = React.memo(({id, title, description}) => {
+const Task: React.FC<TaskProps> = React.memo(({task}) => {
     const {remove} = useTasks();
     const {startDrag, endDrag} = useDrag();
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const openEditModal = () => setIsEditModalOpen(true);
+    const closeEditModal = () => setIsEditModalOpen(false);
 
     const handleDragStart = () => {
-        startDrag(id);
+        startDrag(task.id);
     };
 
     const handleDragEnd = () => {
@@ -21,22 +25,26 @@ const Task: React.FC<TaskProps> = React.memo(({id, title, description}) => {
     };
 
     const handleDelete = () => {
-        remove(id);
+        remove(task.id);
     };
 
     return (
-        <div
-            draggable
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            className="bg-white p-4 rounded shadow mb-4"
-        >
-            <h3 className="font-bold">{title}</h3>
-            <p>{description}</p>
-            <div className="mt-2 flex justify-end space-x-2">
-                <button onClick={handleDelete} className="text-red-500">Delete</button>
+        <>
+            <div
+                draggable
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                className="bg-white p-4 rounded shadow mb-4"
+            >
+                <h3 className="font-bold">{task.title}</h3>
+                <p>{task.description}</p>
+                <div className="mt-2 flex justify-end space-x-2">
+                    <button onClick={openEditModal} className="text-blue-500">Edit</button>
+                    <button onClick={handleDelete} className="text-red-500">Delete</button>
+                </div>
             </div>
-        </div>
+            <TaskForm isOpen={isEditModalOpen} onClose={closeEditModal} task={task}/>
+        </>
     );
 });
 

@@ -16,7 +16,7 @@ const TaskBoard: React.FC = React.memo(() => {
     };
 
     return (
-        <div className="flex space-x-4 p-4">
+        <div className="flex space-x-4 p-4 max-w-[1440px] mx-auto w-full">
             <TaskList status={TASK_STATUSES.TO_DO} onDrop={(e) => handleDrop(e, 'TO_DO')}/>
             <TaskList status={TASK_STATUSES.IN_PROGRESS} onDrop={(e) => handleDrop(e, 'IN_PROGRESS')}/>
             <TaskList status={TASK_STATUSES.COMPLETED} onDrop={(e) => handleDrop(e, 'COMPLETED')}/>
