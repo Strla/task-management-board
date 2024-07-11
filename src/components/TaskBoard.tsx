@@ -1,15 +1,19 @@
 import React from 'react';
+import {useTypedSelector} from '../hooks/useTypedSelector';
 import {useDispatch} from 'react-redux';
-import {moveTask} from '../features/tasks/tasksSlice';
+import {moveTask} from '../features/tasks/tasksActions';
 import {TaskStatus} from '../features/tasks/taskTypes';
 import TaskList from './TaskList';
 
-const TaskBoard: React.FC = () => {
+const TaskBoard: React.FC = React.memo(() => {
     const dispatch = useDispatch();
+    const draggingItemId = useTypedSelector(state => state.dragging.draggingItemId);
 
     const handleDrop = (e: React.DragEvent, status: TaskStatus) => {
-        const id = e.dataTransfer.getData('text/plain');
-        dispatch(moveTask({id, status}));
+        e.preventDefault();
+        if (draggingItemId) {
+            dispatch(moveTask({id: draggingItemId, status}));
+        }
     };
 
     return (
@@ -19,6 +23,6 @@ const TaskBoard: React.FC = () => {
             <TaskList status={TaskStatus.Completed} onDrop={handleDrop}/>
         </div>
     );
-};
+});
 
 export default TaskBoard;
