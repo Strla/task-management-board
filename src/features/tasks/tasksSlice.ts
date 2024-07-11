@@ -1,14 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-export interface Task {
-    id: string;
-    title: string;
-    description: string;
-    status: 'To Do' | 'In Progress' | 'Completed';
-    dueDate?: string;
-    priority?: 'Low' | 'Medium' | 'High';
-    assignedTo?: string;
-}
+import {Task, TaskStatus} from './taskTypes';
 
 export interface TasksState {
     tasks: Task[];
@@ -34,7 +25,7 @@ const tasksSlice = createSlice({
         deleteTask(state, action: PayloadAction<string>) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload);
         },
-        moveTask(state, action: PayloadAction<{ id: string; status: Task['status'] }>) {
+        moveTask(state, action: PayloadAction<{ id: string; status: TaskStatus }>) {
             const index = state.tasks.findIndex(task => task.id === action.payload.id);
             if (index !== -1) {
                 state.tasks[index].status = action.payload.status;

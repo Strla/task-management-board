@@ -1,10 +1,10 @@
 import React from 'react';
-import TestComponent from './components/TestComponent';
+import TaskBoard from './components/TaskBoard';
 
 const App: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-200 p-8">
-            <TestComponent/>
+            <TaskBoard/>
         </div>
     );
 };
