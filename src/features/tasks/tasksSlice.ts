@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {Task} from './taskTypes';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {Task, TaskStatus} from './taskTypes';
 import {addTask, deleteTask, editTask, moveTask} from './tasksActions';
 
 export interface TasksState {
@@ -16,19 +16,19 @@ const tasksSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(addTask, (state, action) => {
+            .addCase(addTask, (state, action: PayloadAction<Task>) => {
                 state.tasks.push(action.payload);
             })
-            .addCase(editTask, (state, action) => {
+            .addCase(editTask, (state, action: PayloadAction<Task>) => {
                 const index = state.tasks.findIndex(task => task.id === action.payload.id);
                 if (index !== -1) {
                     state.tasks[index] = action.payload;
                 }
             })
-            .addCase(deleteTask, (state, action) => {
+            .addCase(deleteTask, (state, action: PayloadAction<string>) => {
                 state.tasks = state.tasks.filter(task => task.id !== action.payload);
             })
-            .addCase(moveTask, (state, action) => {
+            .addCase(moveTask, (state, action: PayloadAction<{ id: string; status: TaskStatus }>) => {
                 const index = state.tasks.findIndex(task => task.id === action.payload.id);
                 if (index !== -1) {
                     state.tasks[index].status = action.payload.status;

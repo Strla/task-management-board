@@ -1,8 +1,6 @@
-export enum TaskStatus {
-    ToDo = 'To Do',
-    InProgress = 'In Progress',
-    Completed = 'Completed'
-}
+import {TASK_STATUSES} from '../../constants';
+
+export type TaskStatus = typeof TASK_STATUSES[keyof typeof TASK_STATUSES];
 
 export interface Task {
     id: string;

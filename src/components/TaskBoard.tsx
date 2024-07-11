@@ -1,26 +1,25 @@
 import React from 'react';
-import {useTypedSelector} from '../hooks/useTypedSelector';
-import {useDispatch} from 'react-redux';
-import {moveTask} from '../features/tasks/tasksActions';
-import {TaskStatus} from '../features/tasks/taskTypes';
+import {useTasks} from '../hooks/useTasks';
+import {TASK_STATUSES} from '../constants';
 import TaskList from './TaskList';
+import {useDrag} from '../hooks/useDrag';
 
 const TaskBoard: React.FC = React.memo(() => {
-    const dispatch = useDispatch();
-    const draggingItemId = useTypedSelector(state => state.dragging.draggingItemId);
+    const {move} = useTasks();
+    const {draggingItemId} = useDrag();
 
-    const handleDrop = (e: React.DragEvent, status: TaskStatus) => {
+    const handleDrop = (e: React.DragEvent, status: keyof typeof TASK_STATUSES) => {
         e.preventDefault();
         if (draggingItemId) {
-            dispatch(moveTask({id: draggingItemId, status}));
+            move(draggingItemId, TASK_STATUSES[status]);
         }
     };
 
     return (
         <div className="flex space-x-4 p-4">
-            <TaskList status={TaskStatus.ToDo} onDrop={handleDrop}/>
-            <TaskList status={TaskStatus.InProgress} onDrop={handleDrop}/>
-            <TaskList status={TaskStatus.Completed} onDrop={handleDrop}/>
+            <TaskList status={TASK_STATUSES.TO_DO} onDrop={(e) => handleDrop(e, 'TO_DO')}/>
+            <TaskList status={TASK_STATUSES.IN_PROGRESS} onDrop={(e) => handleDrop(e, 'IN_PROGRESS')}/>
+            <TaskList status={TASK_STATUSES.COMPLETED} onDrop={(e) => handleDrop(e, 'COMPLETED')}/>
         </div>
     );
 });

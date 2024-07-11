@@ -1,7 +1,6 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
-import {deleteTask} from '../features/tasks/tasksActions';
-import {setDraggingItemId} from '../features/dragging/draggingSlice';
+import {useTasks} from '../hooks/useTasks';
+import {useDrag} from '../hooks/useDrag';
 
 interface TaskProps {
     id: string;
@@ -10,18 +9,19 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = React.memo(({id, title, description}) => {
-    const dispatch = useDispatch();
+    const {remove} = useTasks();
+    const {startDrag, endDrag} = useDrag();
 
     const handleDragStart = () => {
-        dispatch(setDraggingItemId(id));
+        startDrag(id);
     };
 
     const handleDragEnd = () => {
-        dispatch(setDraggingItemId(null));
+        endDrag();
     };
 
     const handleDelete = () => {
-        dispatch(deleteTask(id));
+        remove(id);
     };
 
     return (
