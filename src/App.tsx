@@ -1,12 +1,12 @@
-import './App.css'
+import React from 'react';
+import TestComponent from './components/TestComponent';
 
-function App() {
-
+const App: React.FC = () => {
     return (
-        <h1 className="text-3xl font-bold underline">
-            Hello world!
-        </h1>
-    )
-}
+        <div className="min-h-screen bg-gray-200 p-8">
+            <TestComponent/>
+        </div>
+    );
+};
 
-export default App
+export default App;
