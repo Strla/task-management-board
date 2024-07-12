@@ -38,7 +38,8 @@ const TaskFilter = () => {
     };
 
     return (
-        <div className="flex mx-auto items-center space-x-4 px-4 py-2 bg-white rounded shadow-sm justify-between">
+        <div
+            className="flex flex-col justify-between gap-4 lg:flex-row mx-auto items-center px-4 py-2 bg-white rounded shadow-sm">
             <div className="flex items-center space-x-2">
                 <label className="text-gray-700">Assigned To</label>
                 <select

@@ -53,11 +53,11 @@ const Task = React.memo(({task}: TaskProps) => {
                 <p>{task.description}</p>
                 <div className="mt-2 flex justify-end space-x-2">
                     <Button onClick={() => dispatch(openEditModal(task.id))}
-                            className="text-blue-500 shadow-sm bg-gray-50">
+                            className="text-blue-500 bg-gray-100 hover:bg-gray-200">
                         Edit
                     </Button>
                     <Button onClick={() => dispatch(openConfirmModal(task.id))}
-                            className="text-red-500 shadow-sm bg-gray-50">
+                            className="text-red-500 bg-gray-100 hover:bg-gray-200">
                         Delete
                     </Button>
                 </div>

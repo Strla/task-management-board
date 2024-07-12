@@ -9,7 +9,11 @@ interface ButtonProps {
 
 const Button = ({onClick, className, children, type = 'button'}: ButtonProps) => {
     return (
-        <button onClick={onClick} className={`px-4 py-2 rounded transition duration-200 ${className}`} type={type}>
+        <button
+            onClick={onClick}
+            className={`px-3 py-2 rounded transition duration-200 ${className}`}
+            type={type}
+        >
             {children}
         </button>
     );
