@@ -1,4 +1,5 @@
 import Modal from './Modal';
+import Button from './Button';
 
 interface ConfirmationModalProps {
     isOpen: boolean;
@@ -14,12 +15,12 @@ const ConfirmationModal = ({isOpen, onClose, onConfirm, title, message}: Confirm
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
             <p className="mb-4">{message}</p>
             <div className="flex justify-end space-x-4">
-                <button onClick={onClose}
-                        className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">Cancel
-                </button>
-                <button onClick={onConfirm}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Confirm
-                </button>
+                <Button onClick={onClose} className="bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    Cancel
+                </Button>
+                <Button onClick={onConfirm} className="bg-red-500 text-white hover:bg-red-600">
+                    Confirm
+                </Button>
             </div>
         </Modal>
     );

@@ -3,6 +3,7 @@ import {useTaskForm} from '../hooks/useTaskForm';
 import Modal from './Modal';
 import {Task} from '../features/tasks/taskTypes';
 import {Priority, USERS} from '../constants';
+import Button from './Button';
 
 interface TaskFormProps {
     isOpen: boolean;
@@ -82,8 +83,9 @@ const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
                     {errors.assignedTo && <p className="text-red-500 text-sm mt-1">{errors.assignedTo.message}</p>}
                 </div>
 
-                <button type="submit"
-                        className="bg-blue-500 text-white p-2 rounded">{task ? 'Save Changes' : 'Add Task'}</button>
+                <Button type="submit" className="bg-blue-500 text-white">
+                    {task ? 'Save Changes' : 'Add Task'}
+                </Button>
             </form>
         </Modal>
     );

@@ -1,35 +1,40 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {setFilter} from '../features/tasks/tasksSlice';
 import {Priority, USERS} from '../constants';
+import Button from './Button';
+
+interface Filters {
+    assignedTo: string;
+    priority: string;
+    dueDate: string;
+}
 
 const TaskFilter = () => {
-    const [assignedTo, setAssignedToFilter] = useState<string>('');
-    const [priority, setPriorityFilter] = useState<string>('');
-    const [dueDate, setDueDateFilter] = useState<string>('');
+    const [filters, setFilters] = useState<Filters>({assignedTo: '', priority: '', dueDate: ''});
     const dispatch = useDispatch();
 
     useEffect(() => {
         const storedFilters = JSON.parse(localStorage.getItem('taskFilters') || '{}');
-        if (storedFilters.assignedTo) setAssignedToFilter(storedFilters.assignedTo);
-        if (storedFilters.priority) setPriorityFilter(storedFilters.priority);
-        if (storedFilters.dueDate) setDueDateFilter(storedFilters.dueDate);
-
+        setFilters(storedFilters);
         dispatch(setFilter(storedFilters));
     }, [dispatch]);
 
     const handleFilterChange = () => {
-        const filters = {assignedTo, priority, dueDate};
         dispatch(setFilter(filters));
         localStorage.setItem('taskFilters', JSON.stringify(filters));
     };
 
     const handleResetFilter = () => {
-        setAssignedToFilter('');
-        setPriorityFilter('');
-        setDueDateFilter('');
-        dispatch(setFilter({assignedTo: '', priority: '', dueDate: ''}));
+        const resetFilters = {assignedTo: '', priority: '', dueDate: ''};
+        setFilters(resetFilters);
+        dispatch(setFilter(resetFilters));
         localStorage.removeItem('taskFilters');
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+        const {name, value} = e.target;
+        setFilters({...filters, [name]: value});
     };
 
     return (
@@ -37,8 +42,9 @@ const TaskFilter = () => {
             <div className="flex items-center space-x-2">
                 <label className="text-gray-700">Assigned To</label>
                 <select
-                    value={assignedTo}
-                    onChange={(e) => setAssignedToFilter(e.target.value)}
+                    name="assignedTo"
+                    value={filters.assignedTo}
+                    onChange={handleChange}
                     className="p-1 border border-gray-300 rounded"
                 >
                     <option value="">All</option>
@@ -50,8 +56,9 @@ const TaskFilter = () => {
             <div className="flex items-center space-x-2">
                 <label className="text-gray-700">Priority</label>
                 <select
-                    value={priority}
-                    onChange={(e) => setPriorityFilter(e.target.value)}
+                    name="priority"
+                    value={filters.priority}
+                    onChange={handleChange}
                     className="p-1 border border-gray-300 rounded"
                 >
                     <option value="">All</option>
@@ -64,24 +71,19 @@ const TaskFilter = () => {
                 <label className="text-gray-700">Due Date</label>
                 <input
                     type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDateFilter(e.target.value)}
+                    name="dueDate"
+                    value={filters.dueDate}
+                    onChange={handleChange}
                     className="p-1 border border-gray-300 rounded"
                 />
             </div>
             <div className="flex gap-4">
-                <button
-                    onClick={handleFilterChange}
-                    className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 transition duration-200"
-                >
+                <Button onClick={handleFilterChange} className="bg-blue-500 text-white hover:bg-blue-600">
                     Apply
-                </button>
-                <button
-                    onClick={handleResetFilter}
-                    className="bg-gray-200 text-black px-3 py-2 rounded hover:bg-gray-300 transition duration-200"
-                >
+                </Button>
+                <Button onClick={handleResetFilter} className="bg-gray-200 text-black hover:bg-gray-300">
                     Reset
-                </button>
+                </Button>
             </div>
         </div>
     );

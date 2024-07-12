@@ -1,6 +1,7 @@
 import {Task} from '../features/tasks/taskTypes';
 import Modal from './Modal';
 import {format} from 'date-fns';
+import Button from './Button';
 
 interface TaskDetailsProps {
     isOpen: boolean;
@@ -31,9 +32,9 @@ const TaskDetails = ({isOpen, onClose, task}: TaskDetailsProps) => {
                 )}
             </div>
             <div className="mt-6 text-right">
-                <button onClick={onClose}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Close
-                </button>
+                <Button onClick={onClose} className="bg-blue-500 text-white hover:bg-blue-600">
+                    Close
+                </Button>
             </div>
         </Modal>
     );

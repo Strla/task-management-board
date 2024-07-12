@@ -15,6 +15,7 @@ import TaskForm from './TaskForm';
 import ConfirmationModal from './ConfirmationModal';
 import {RootState} from '../app/store';
 import {deleteTask} from "../features/tasks/tasksActions";
+import Button from './Button';
 
 interface TaskProps {
     task: TaskType;
@@ -51,8 +52,14 @@ const Task = React.memo(({task}: TaskProps) => {
                 </h3>
                 <p>{task.description}</p>
                 <div className="mt-2 flex justify-end space-x-2">
-                    <button onClick={() => dispatch(openEditModal(task.id))} className="text-blue-500">Edit</button>
-                    <button onClick={() => dispatch(openConfirmModal(task.id))} className="text-red-500">Delete</button>
+                    <Button onClick={() => dispatch(openEditModal(task.id))}
+                            className="text-blue-500 shadow-sm bg-gray-50">
+                        Edit
+                    </Button>
+                    <Button onClick={() => dispatch(openConfirmModal(task.id))}
+                            className="text-red-500 shadow-sm bg-gray-50">
+                        Delete
+                    </Button>
                 </div>
             </div>
             {modals.isEditModalOpen && modals.taskId === task.id && (
