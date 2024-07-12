@@ -3,6 +3,7 @@ import {validationRules} from '../utils/validationRules';
 import {useTaskForm} from '../hooks/useTaskForm';
 import Modal from './Modal';
 import {Task} from '../features/tasks/taskTypes';
+import {Priority, USERS} from '../constants';
 
 interface TaskFormProps {
     isOpen: boolean;
@@ -35,6 +36,41 @@ const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
               className={`block w-full p-2 border rounded ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
           ></textarea>
                     {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <input
+                        {...register('dueDate')}
+                        type="date"
+                        className={`block w-full p-2 border rounded ${errors.dueDate ? 'border-red-500' : 'border-gray-300'}`}
+                    />
+                    {errors.dueDate && <p className="text-red-500 text-sm mt-1">{errors.dueDate.message}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <select
+                        {...register('priority')}
+                        className={`block w-full p-2 border rounded ${errors.priority ? 'border-red-500' : 'border-gray-300'}`}
+                    >
+                        <option value="">Select Priority</option>
+                        <option value={Priority.LOW}>Low</option>
+                        <option value={Priority.MEDIUM}>Medium</option>
+                        <option value={Priority.HIGH}>High</option>
+                    </select>
+                    {errors.priority && <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>}
+                </div>
+
+                <div className="mb-4">
+                    <select
+                        {...register('assignedTo')}
+                        className={`block w-full p-2 border rounded ${errors.assignedTo ? 'border-red-500' : 'border-gray-300'}`}
+                    >
+                        <option value="">Assign to</option>
+                        {USERS.map(user => (
+                            <option key={user} value={user}>{user}</option>
+                        ))}
+                    </select>
+                    {errors.assignedTo && <p className="text-red-500 text-sm mt-1">{errors.assignedTo.message}</p>}
                 </div>
 
                 <button type="submit"

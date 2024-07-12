@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Task, TaskStatus} from './taskTypes';
+import {Task} from './taskTypes';
 import {addTask, deleteTask, editTask, moveTask} from './tasksActions';
+import {TaskStatus} from "../../constants";
 
 export interface TasksState {
     tasks: Task[];

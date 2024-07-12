@@ -1,6 +1,5 @@
-import {TASK_STATUSES} from '../../constants';
+import {Priority, TaskStatus} from '../../constants';
 
-export type TaskStatus = typeof TASK_STATUSES[keyof typeof TASK_STATUSES];
 
 export interface Task {
     id: string;
@@ -8,6 +7,6 @@ export interface Task {
     description: string;
     status: TaskStatus;
     dueDate?: string;
-    priority?: 'Low' | 'Medium' | 'High';
+    priority?: Priority;
     assignedTo?: string;
 }

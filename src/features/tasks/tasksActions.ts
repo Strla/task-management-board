@@ -1,5 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
-import {Task, TaskStatus} from './taskTypes';
+import {Task} from './taskTypes';
+import {TaskStatus} from "../../constants";
 
 export const addTask = createAction<Task>('tasks/addTask');
 export const editTask = createAction<Task>('tasks/editTask');

@@ -38,6 +38,9 @@ const Task: React.FC<TaskProps> = React.memo(({task}) => {
             >
                 <h3 className="font-bold">{task.title}</h3>
                 <p>{task.description}</p>
+                {task.dueDate && <p>Due: {task.dueDate}</p>}
+                {task.priority && <p>Priority: {task.priority}</p>}
+                {task.assignedTo && <p>Assigned to: {task.assignedTo}</p>}
                 <div className="mt-2 flex justify-end space-x-2">
                     <button onClick={openEditModal} className="text-blue-500">Edit</button>
                     <button onClick={handleDelete} className="text-red-500">Delete</button>

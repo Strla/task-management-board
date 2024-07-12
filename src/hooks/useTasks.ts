@@ -1,7 +1,8 @@
 import {useTypedSelector} from './useTypedSelector';
 import {useDispatch} from 'react-redux';
 import {addTask, deleteTask, editTask, moveTask} from '../features/tasks/tasksActions';
-import {Task, TaskStatus} from '../features/tasks/taskTypes';
+import {Task} from '../features/tasks/taskTypes';
+import {TaskStatus} from "../constants";
 
 export const useTasks = () => {
     const tasks = useTypedSelector(state => state.tasks.tasks);

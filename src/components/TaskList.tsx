@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTypedSelector} from '../hooks/useTypedSelector';
-import {TaskStatus} from '../features/tasks/taskTypes';
 import Task from './Task';
+import {TaskStatus} from "../constants";
 
 interface TaskListProps {
     status: TaskStatus;
