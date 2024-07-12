@@ -1,20 +1,20 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useTasks} from '../hooks/useTasks';
-import {useDrag} from '../hooks/useDrag';
-import TaskForm from './TaskForm';
-import TaskDetailsModal from './TaskDetails';
-import ConfirmationModal from './ConfirmationModal';
 import {Task as TaskType} from '../features/tasks/taskTypes';
+import {useDrag} from '../hooks/useDrag';
 import {
     closeConfirmModal,
     closeDetailsModal,
     closeEditModal,
     openConfirmModal,
     openDetailsModal,
-    openEditModal,
+    openEditModal
 } from '../features/modals/modalsSlice';
+import TaskDetailsModal from './TaskDetails';
+import TaskForm from './TaskForm';
+import ConfirmationModal from './ConfirmationModal';
 import {RootState} from '../app/store';
+import {deleteTask} from "../features/tasks/tasksActions";
 
 interface TaskProps {
     task: TaskType;
@@ -22,7 +22,6 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = React.memo(({task}) => {
     const dispatch = useDispatch();
-    const {remove} = useTasks();
     const {startDrag, endDrag} = useDrag();
     const modals = useSelector((state: RootState) => state.modals);
 
@@ -35,7 +34,7 @@ const Task: React.FC<TaskProps> = React.memo(({task}) => {
     };
 
     const handleDelete = () => {
-        remove(task.id);
+        dispatch(deleteTask(task.id));
         dispatch(closeConfirmModal());
     };
 
@@ -47,8 +46,9 @@ const Task: React.FC<TaskProps> = React.memo(({task}) => {
                 onDragEnd={handleDragEnd}
                 className="bg-white p-4 rounded shadow mb-4"
             >
-                <h3 className="font-bold cursor-pointer"
-                    onClick={() => dispatch(openDetailsModal(task.id))}>{task.title}</h3>
+                <h3 className="font-bold cursor-pointer" onClick={() => dispatch(openDetailsModal(task.id))}>
+                    {task.title}
+                </h3>
                 <p>{task.description}</p>
                 <div className="mt-2 flex justify-end space-x-2">
                     <button onClick={() => dispatch(openEditModal(task.id))} className="text-blue-500">Edit</button>

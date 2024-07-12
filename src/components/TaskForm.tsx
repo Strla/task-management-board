@@ -20,7 +20,9 @@ const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
                 <h2 className="text-2xl font-bold mb-4">{task ? 'Edit Task' : 'Add Task'}</h2>
 
                 <div className="mb-4">
+                    <label htmlFor="title" className="block mb-2">Task Title</label>
                     <input
+                        id="title"
                         {...register('title', validationRules.title)}
                         type="text"
                         placeholder="Task title"
@@ -30,16 +32,20 @@ const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
                 </div>
 
                 <div className="mb-4">
-          <textarea
-              {...register('description', validationRules.description)}
-              placeholder="Task description"
-              className={`block w-full p-2 border rounded ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
-          ></textarea>
+                    <label htmlFor="description" className="block mb-2">Task Description</label>
+                    <textarea
+                        id="description"
+                        {...register('description', validationRules.description)}
+                        placeholder="Task description"
+                        className={`block w-full p-2 border rounded ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
+                    ></textarea>
                     {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
                 </div>
 
                 <div className="mb-4">
+                    <label htmlFor="dueDate" className="block mb-2">Due Date</label>
                     <input
+                        id="dueDate"
                         {...register('dueDate')}
                         type="date"
                         className={`block w-full p-2 border rounded ${errors.dueDate ? 'border-red-500' : 'border-gray-300'}`}
@@ -48,7 +54,9 @@ const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
                 </div>
 
                 <div className="mb-4">
+                    <label htmlFor="priority" className="block mb-2">Priority</label>
                     <select
+                        id="priority"
                         {...register('priority')}
                         className={`block w-full p-2 border rounded ${errors.priority ? 'border-red-500' : 'border-gray-300'}`}
                     >
@@ -61,7 +69,9 @@ const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
                 </div>
 
                 <div className="mb-4">
+                    <label htmlFor="assignedTo" className="block mb-2">Assign To</label>
                     <select
+                        id="assignedTo"
                         {...register('assignedTo')}
                         className={`block w-full p-2 border rounded ${errors.assignedTo ? 'border-red-500' : 'border-gray-300'}`}
                     >

@@ -11,7 +11,10 @@ export const useTasks = () => {
     const add = (task: Task) => dispatch(addTask(task));
     const edit = (task: Task) => dispatch(editTask(task));
     const remove = (taskId: string) => dispatch(deleteTask(taskId));
-    const move = (taskId: string, status: TaskStatus) => dispatch(moveTask({id: taskId, status}));
+    const move = (taskId: string, status: TaskStatus) => {
+        console.log(`Dispatching moveTask for taskId: ${taskId} to status: ${status}`);
+        dispatch(moveTask({id: taskId, status}));
+    };
 
     return {tasks, add, edit, remove, move};
 };
