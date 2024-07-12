@@ -10,10 +10,18 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
     const tasks = useTypedSelector(state => state.tasks.tasks);
+    const filter = useTypedSelector(state => state.tasks.filter);
 
     const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault();
     };
+
+    const filteredTasks = tasks.filter(task => {
+        const matchAssignedTo = !filter?.assignedTo || (task.assignedTo && task.assignedTo === filter.assignedTo);
+        const matchPriority = !filter?.priority || (task.priority && task.priority === filter.priority);
+        const matchDueDate = !filter?.dueDate || (task.dueDate && task.dueDate === filter.dueDate);
+        return task.status === status && matchAssignedTo && matchPriority && matchDueDate;
+    });
 
     return (
         <div
@@ -26,11 +34,9 @@ const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
         >
             <h2 className="text-xl font-bold sticky top-0 bg-gray-100 w-full z-10 p-4">{status}</h2>
             <div className="pb-4 pl-4 pr-4">
-                {tasks
-                    .filter(task => task.status === status)
-                    .map(task => (
-                        <Task key={task.id} task={task}/>
-                    ))}
+                {filteredTasks.map(task => (
+                    <Task key={task.id} task={task}/>
+                ))}
             </div>
         </div>
     );

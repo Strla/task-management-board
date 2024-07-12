@@ -5,16 +5,26 @@ import {TaskStatus} from '../../constants';
 
 export interface TasksState {
     tasks: Task[];
+    filter: {
+        assignedTo?: string;
+        priority?: string;
+        dueDate?: string;
+    };
 }
 
 const initialState: TasksState = {
     tasks: [],
+    filter: {} // Initialize filter as an empty object
 };
 
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
-    reducers: {},
+    reducers: {
+        setFilter(state, action: PayloadAction<{ assignedTo?: string; priority?: string; dueDate?: string }>) {
+            state.filter = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(addTask, (state, action: PayloadAction<Task>) => {
@@ -38,4 +48,5 @@ const tasksSlice = createSlice({
     },
 });
 
+export const {setFilter} = tasksSlice.actions;
 export default tasksSlice.reducer;
