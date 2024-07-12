@@ -11,9 +11,21 @@ import {Priority, TaskStatus} from '../../constants';
 
 const mockStore = configureStore<RootState>([]);
 const initialState = {
-    tasks: {tasks: []},
+    tasks: {
+        tasks: [],
+        filter: { // Add the filter property
+            assignedTo: '',
+            priority: '',
+            dueDate: ''
+        }
+    },
     dragging: {draggingItemId: null},
-    modals: {isEditModalOpen: false, isDetailsModalOpen: false, isConfirmModalOpen: false, taskId: null}
+    modals: {
+        isEditModalOpen: false,
+        isDetailsModalOpen: false,
+        isConfirmModalOpen: false,
+        taskId: null
+    }
 };
 const store = mockStore(initialState);
 

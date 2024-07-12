@@ -22,7 +22,12 @@ const initialState = {
                 assignedTo: 'Bob Dylan',
                 dueDate: '',
             }
-        ]
+        ],
+        filter: {
+            assignedTo: '',
+            priority: '',
+            dueDate: ''
+        }
     },
     dragging: {draggingItemId: null},
     modals: {isEditModalOpen: false, isDetailsModalOpen: false, isConfirmModalOpen: false, taskId: null}
@@ -55,9 +60,6 @@ test('should change task status on drop', async () => {
         fireEvent.dragOver(screen.getByText('In Progress'), {dataTransfer});
         fireEvent.drop(screen.getByText('In Progress'), {dataTransfer});
     });
-
-    // Log the actions for debugging
-    // const actionsAfterDrop = store.getActions();
 
     // Wait for the actions to be dispatched
     await waitFor(() => {
