@@ -52,22 +52,33 @@ const Task = React.memo(({task}: TaskProps) => {
                 </h3>
                 <p>{task.description}</p>
                 <div className="mt-2 flex justify-end space-x-2">
-                    <Button onClick={() => dispatch(openEditModal(task.id))}
-                            className="text-blue-500 bg-gray-100 hover:bg-gray-200">
+                    <Button
+                        onClick={() => dispatch(openEditModal(task.id))}
+                        className="text-blue-500 bg-gray-50 hover:bg-gray-100 shadow-sm"
+                    >
                         Edit
                     </Button>
-                    <Button onClick={() => dispatch(openConfirmModal(task.id))}
-                            className="text-red-500 bg-gray-100 hover:bg-gray-200">
+                    <Button
+                        onClick={() => dispatch(openConfirmModal(task.id))}
+                        className="text-red-500 bg-gray-50 hover:bg-gray-100 shadow-sm"
+                    >
                         Delete
                     </Button>
                 </div>
             </div>
             {modals.isEditModalOpen && modals.taskId === task.id && (
-                <TaskForm isOpen={modals.isEditModalOpen} onClose={() => dispatch(closeEditModal())} task={task}/>
+                <TaskForm
+                    isOpen={modals.isEditModalOpen}
+                    onClose={() => dispatch(closeEditModal())}
+                    task={task}
+                />
             )}
             {modals.isDetailsModalOpen && modals.taskId === task.id && (
-                <TaskDetailsModal isOpen={modals.isDetailsModalOpen} onClose={() => dispatch(closeDetailsModal())}
-                                  task={task}/>
+                <TaskDetailsModal
+                    isOpen={modals.isDetailsModalOpen}
+                    onClose={() => dispatch(closeDetailsModal())}
+                    task={task}
+                />
             )}
             {modals.isConfirmModalOpen && modals.taskId === task.id && (
                 <ConfirmationModal

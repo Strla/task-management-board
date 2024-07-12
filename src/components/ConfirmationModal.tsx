@@ -12,7 +12,7 @@ interface ConfirmationModalProps {
 const ConfirmationModal = ({isOpen, onClose, onConfirm, title, message}: ConfirmationModalProps) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <h2 className="text-2xl font-bold mb-4">{title}</h2>
+            <h2 className="text-2xl font-bold mb-4" id="confirmation-modal-title">{title}</h2>
             <p className="mb-4">{message}</p>
             <div className="flex justify-end space-x-4">
                 <Button onClick={onClose} className="bg-gray-200 text-gray-700 hover:bg-gray-300">

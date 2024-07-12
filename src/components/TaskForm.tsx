@@ -16,8 +16,8 @@ const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
 
     return (
         <Modal isOpen={isOpen} onClose={handleClose}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="text-2xl font-bold mb-4">{task ? 'Edit Task' : 'Add Task'}</h2>
+            <form onSubmit={handleSubmit(onSubmit)} aria-labelledby="form-title">
+                <h2 id="form-title" className="text-2xl font-bold mb-4">{task ? 'Edit Task' : 'Add Task'}</h2>
 
                 <div className="mb-4">
                     <label htmlFor="title" className="block mb-2">Task Title</label>
@@ -26,9 +26,12 @@ const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
                         {...register('title', validationRules.title)}
                         type="text"
                         placeholder="Task title"
+                        aria-invalid={errors.title ? "true" : "false"}
+                        aria-describedby={errors.title ? "title-error" : undefined}
                         className={`block w-full p-2 border rounded ${errors.title ? 'border-red-500' : 'border-gray-300'}`}
                     />
-                    {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
+                    {errors.title &&
+                        <p id="title-error" className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -37,9 +40,12 @@ const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
                         id="description"
                         {...register('description', validationRules.description)}
                         placeholder="Task description"
+                        aria-invalid={errors.description ? "true" : "false"}
+                        aria-describedby={errors.description ? "description-error" : undefined}
                         className={`block w-full p-2 border rounded ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
                     ></textarea>
-                    {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
+                    {errors.description && <p id="description-error"
+                                              className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -83,7 +89,7 @@ const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
                     {errors.assignedTo && <p className="text-red-500 text-sm mt-1">{errors.assignedTo.message}</p>}
                 </div>
 
-                <Button type="submit" className="bg-blue-500 text-white">
+                <Button type="submit" className="bg-blue-500 text-white p-2 rounded">
                     {task ? 'Save Changes' : 'Add Task'}
                 </Button>
             </form>
