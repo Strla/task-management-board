@@ -8,6 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+/build
+/build/**/*.d.ts
+/src/**/*.d.ts
+/src/hooks/*.d.ts
+/src/utils/**/*.d.ts
 dist
 dist-ssr
 *.local
