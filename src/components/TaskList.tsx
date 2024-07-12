@@ -24,12 +24,14 @@ const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
 
     return (
         <div
-            className="flex-1 bg-gray-100 p-4 rounded"
+            className="flex-1 bg-gray-100 rounded max-h-[80vh] overflow-y-auto"
             onDrop={(e) => onDrop(e, status)}
             onDragOver={handleDragOver}
         >
-            <h2 className="text-xl font-bold mb-4">{status}</h2>
-            {renderTasks()}
+            <h2 className="text-xl font-bold sticky top-0 bg-gray-100 w-full z-10 p-4">{status}</h2>
+            <div className="pb-4 pl-4 pr-4">
+                {renderTasks()}
+            </div>
         </div>
     );
 };
