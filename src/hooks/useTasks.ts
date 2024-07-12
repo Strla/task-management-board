@@ -12,7 +12,6 @@ export const useTasks = () => {
     const edit = (task: Task) => dispatch(editTask(task));
     const remove = (taskId: string) => dispatch(deleteTask(taskId));
     const move = (taskId: string, status: TaskStatus) => {
-        console.log(`Dispatching moveTask for taskId: ${taskId} to status: ${status}`);
         dispatch(moveTask({id: taskId, status}));
     };
 

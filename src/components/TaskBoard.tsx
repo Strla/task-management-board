@@ -4,17 +4,15 @@ import {TaskStatus} from '../constants';
 import TaskList from './TaskList';
 import {useDrag} from '../hooks/useDrag';
 
-const TaskBoard: React.FC = React.memo(() => {
+const TaskBoard = React.memo(() => {
     const {move} = useTasks();
     const {draggingItemId, endDrag} = useDrag();
 
     const handleDrop = (e: React.DragEvent, status: TaskStatus) => {
         e.preventDefault();
-        console.log('Drop event triggered');
         if (draggingItemId) {
-            console.log('Moving task:', draggingItemId, 'to status:', status);
             move(draggingItemId, status);
-            endDrag();  // Ensure dragging state is reset after drop
+            endDrag();
         }
     };
 

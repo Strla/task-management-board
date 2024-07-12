@@ -20,7 +20,7 @@ interface TaskProps {
     task: TaskType;
 }
 
-const Task: React.FC<TaskProps> = React.memo(({task}) => {
+const Task = React.memo(({task}: TaskProps) => {
     const dispatch = useDispatch();
     const {startDrag, endDrag} = useDrag();
     const modals = useSelector((state: RootState) => state.modals);

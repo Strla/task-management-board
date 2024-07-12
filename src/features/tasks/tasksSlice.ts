@@ -14,7 +14,7 @@ export interface TasksState {
 
 const initialState: TasksState = {
     tasks: [],
-    filter: {} // Initialize filter as an empty object
+    filter: {}
 };
 
 const tasksSlice = createSlice({

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Task} from '../features/tasks/taskTypes';
 import Modal from './Modal';
 import {format} from 'date-fns';
@@ -9,7 +8,7 @@ interface TaskDetailsProps {
     task: Task;
 }
 
-const TaskDetails: React.FC<TaskDetailsProps> = ({isOpen, onClose, task}) => {
+const TaskDetails = ({isOpen, onClose, task}: TaskDetailsProps) => {
     const formattedDueDate = task.dueDate ? format(new Date(task.dueDate), 'MMMM dd, yyyy') : null;
 
     return (

@@ -42,7 +42,6 @@ test('should change task status on drop', async () => {
 
         // Ensure the task is being dragged
         const actionsAfterDragStart = store.getActions();
-        console.log('Actions after drag start:', actionsAfterDragStart);
         expect(actionsAfterDragStart).toContainEqual(setDraggingItemId('1'));
 
         // Mocking DataTransfer
@@ -58,13 +57,11 @@ test('should change task status on drop', async () => {
     });
 
     // Log the actions for debugging
-    const actionsAfterDrop = store.getActions();
-    console.log('Actions after drop:', actionsAfterDrop);
+    // const actionsAfterDrop = store.getActions();
 
     // Wait for the actions to be dispatched
     await waitFor(() => {
         const actions = store.getActions();
-        console.log('Actions after waitFor:', actions);
         expect(actions).toContainEqual(expect.objectContaining({
             type: moveTask.type,
             payload: {id: '1', status: TaskStatus.IN_PROGRESS}

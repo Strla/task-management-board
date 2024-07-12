@@ -1,10 +1,9 @@
-import React from 'react';
 import TaskBoard from './components/TaskBoard';
 import TaskForm from './components/TaskForm';
 import TaskFilter from './components/TaskFilter'; // Import the TaskFilter component
 import {useModal} from './hooks/useModal';
 
-const App: React.FC = () => {
+const App = () => {
     const {isModalOpen, openModal, closeModal} = useModal();
 
     return (

@@ -8,7 +8,7 @@ interface TaskListProps {
     onDrop: (e: React.DragEvent, status: TaskStatus) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
+const TaskList = ({status, onDrop}: TaskListProps) => {
     const tasks = useTypedSelector(state => state.tasks.tasks);
     const filter = useTypedSelector(state => state.tasks.filter);
 
@@ -27,7 +27,6 @@ const TaskList: React.FC<TaskListProps> = ({status, onDrop}) => {
         <div
             className="flex-1 bg-gray-100 rounded max-h-[80vh] overflow-y-auto"
             onDrop={(e) => {
-                console.log('Drop event on:', status);
                 onDrop(e, status);
             }}
             onDragOver={handleDragOver}

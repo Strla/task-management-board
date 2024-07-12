@@ -1,4 +1,3 @@
-import React from 'react';
 import {validationRules} from '../utils/validationRules';
 import {useTaskForm} from '../hooks/useTaskForm';
 import Modal from './Modal';
@@ -11,7 +10,7 @@ interface TaskFormProps {
     task?: Task;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({isOpen, onClose, task}) => {
+const TaskForm = ({isOpen, onClose, task}: TaskFormProps) => {
     const {register, handleSubmit, errors, onSubmit, handleClose} = useTaskForm(onClose, task);
 
     return (

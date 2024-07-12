@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from './Modal';
 
 interface ConfirmationModalProps {
@@ -9,7 +8,7 @@ interface ConfirmationModalProps {
     message: string;
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({isOpen, onClose, onConfirm, title, message}) => {
+const ConfirmationModal = ({isOpen, onClose, onConfirm, title, message}: ConfirmationModalProps) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
